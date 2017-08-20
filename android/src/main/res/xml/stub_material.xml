@@ -10,7 +10,7 @@
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:paddingTop="8dp"
-    app:include_helper="true"
+    app:include_helper="false"
     app:include_zip="false"
     app:input_background="@drawable/card_input_custom_background"
     app:cursor_color="@color/colorAccent"
