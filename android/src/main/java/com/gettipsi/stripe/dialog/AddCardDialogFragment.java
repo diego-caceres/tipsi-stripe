@@ -75,8 +75,8 @@ public class AddCardDialogFragment extends DialogFragment {
     final View view = View.inflate(getActivity(), R.layout.payment_form_fragment_two, null);
     final AlertDialog dialog = new AlertDialog.Builder(getActivity())
       .setView(view)
-      .setTitle("Enter your card")
-      .setPositiveButton("Done", new DialogInterface.OnClickListener() {
+      .setTitle("Ingrese su tarjeta")
+      .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
           onSaveCLick();
