@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   requireNativeComponent,
   findNodeHandle,
   StyleSheet,
   View,
   TouchableWithoutFeedback,
-  ViewPropTypes,
-} from 'react-native'
-import PropTypes from 'prop-types'
-import StyleSheetPropType from 'react-native/Libraries/StyleSheet/StyleSheetPropType'
-import ViewStylePropTypes from 'react-native/Libraries/Components/View/ViewStylePropTypes'
+  ViewPropTypes
+} from "react-native";
+import PropTypes from "prop-types";
+import StyleSheetPropType from "react-native/Libraries/StyleSheet/StyleSheetPropType";
+import ViewStylePropTypes from "react-native/Libraries/Components/View/ViewStylePropTypes";
 
-import TextInputState from 'react-native/Libraries/Components/TextInput/TextInputState'
+import TextInputState from "react-native/Libraries/Components/TextInput/TextInputState";
 
 const FieldStylePropType = {
   ...ViewStylePropTypes,
-  color: PropTypes.string,
-}
+  color: PropTypes.string
+};
 
 export default class PaymentCardTextField extends Component {
   static propTypes = {
@@ -33,63 +33,61 @@ export default class PaymentCardTextField extends Component {
     numberPlaceholder: PropTypes.string,
 
     onChange: PropTypes.func,
-    onValueChange: PropTypes.func,
-  }
+    onValueChange: PropTypes.func
+  };
 
   static defaultProps = {
     ...View.defaultProps,
-  }
+    expirationPlaceholder: "Fecha de expiración",
+    cvcPlaceholder: "Código de seguridad"
+  };
 
-  valid = false // eslint-disable-line react/sort-comp
+  valid = false; // eslint-disable-line react/sort-comp
   params = {
-    number: '',
+    number: "",
     expMonth: 0,
     expYear: 0,
-    cvc: '',
-  }
+    cvc: ""
+  };
 
   componentWillUnmount() {
     if (this.isFocused()) {
-      this.blur()
+      this.blur();
     }
   }
 
-  isFocused = () => (
-    TextInputState.currentlyFocusedField() === findNodeHandle(this)
-  )
+  isFocused = () =>
+    TextInputState.currentlyFocusedField() === findNodeHandle(this);
 
   focus = () => {
-    TextInputState.focusTextInput(findNodeHandle(this))
-  }
+    TextInputState.focusTextInput(findNodeHandle(this));
+  };
 
   blur = () => {
-    TextInputState.blurTextInput(findNodeHandle(this))
-  }
+    TextInputState.blurTextInput(findNodeHandle(this));
+  };
 
   handlePress = () => {
-    this.focus()
-  }
+    this.focus();
+  };
 
-  handleChange = (event) => {
-    const { onChange, onParamsChange } = this.props
-    const { nativeEvent } = event
+  handleChange = event => {
+    const { onChange, onParamsChange } = this.props;
+    const { nativeEvent } = event;
 
-    this.valid = nativeEvent.valid
-    this.params = nativeEvent.params
+    this.valid = nativeEvent.valid;
+    this.params = nativeEvent.params;
 
     if (onChange) {
-      onChange(event)
+      onChange(event);
     }
     if (onParamsChange) {
-      onParamsChange(
-        nativeEvent.valid,
-        nativeEvent.params
-      )
+      onParamsChange(nativeEvent.valid, nativeEvent.params);
     }
-  }
+  };
 
   render() {
-    const { style, disabled, ...rest } = this.props
+    const { style, disabled, ...rest } = this.props;
     const {
       borderColor,
       borderWidth,
@@ -100,7 +98,7 @@ export default class PaymentCardTextField extends Component {
       fontSize,
       color,
       ...fieldStyles
-    } = StyleSheet.flatten(style)
+    } = StyleSheet.flatten(style);
 
     return (
       <TouchableWithoutFeedback
@@ -109,7 +107,8 @@ export default class PaymentCardTextField extends Component {
         accessible={rest.accessible}
         accessibilityLabel={rest.accessibilityLabel}
         accessibilityTraits={rest.accessibilityTraits}
-        rejectResponderTermination>
+        rejectResponderTermination
+      >
         <NativePaymentCardTextField
           style={[styles.field, fieldStyles]}
           borderColor={borderColor}
@@ -125,7 +124,7 @@ export default class PaymentCardTextField extends Component {
           onChange={this.handleChange}
         />
       </TouchableWithoutFeedback>
-    )
+    );
   }
 }
 
@@ -134,23 +133,27 @@ const styles = StyleSheet.create({
     // The field will conform to whatever width is given, but we do
     // have to set the component's height explicitly on the
     // surrounding view to ensure it gets rendered.
-    height: 44,
+    height: 44
     // Set default background color to prevent transparent background
     //backgroundColor: '#FFFFFF',
-  },
-})
+  }
+});
 
-const NativePaymentCardTextField = requireNativeComponent('CreditCardForm', PaymentCardTextField, {
-  nativeOnly: {
-    borderColor: true,
-    borderWidth: true,
-    cornerRadius: true,
-    textColor: true,
-    fontFamily: true,
-    fontWeight: true,
-    fontStyle: true,
-    fontSize: true,
-    enabled: true,
-    onChange: true,
-  },
-})
+const NativePaymentCardTextField = requireNativeComponent(
+  "CreditCardForm",
+  PaymentCardTextField,
+  {
+    nativeOnly: {
+      borderColor: true,
+      borderWidth: true,
+      cornerRadius: true,
+      textColor: true,
+      fontFamily: true,
+      fontWeight: true,
+      fontStyle: true,
+      fontSize: true,
+      enabled: true,
+      onChange: true
+    }
+  }
+);
