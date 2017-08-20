@@ -93,12 +93,14 @@ public class CustomCardInputReactManager extends SimpleViewManager<CreditCardFor
 
   @ReactProp(name = "expirationPlaceholder")
   public void setExpDateTextHint(CreditCardForm view, String expDateTextHint) {
-    view.setExpDateTextHint(expDateTextHint);
+    //view.setExpDateTextHint(expDateTextHint);
+    view.setExpDateTextHint("Fecha de expiración");
   }
 
   @ReactProp(name = "cvcPlaceholder")
   public void setSecurityCodeTextHint(CreditCardForm view, String securityCodeTextHint) {
-    view.setSecurityCodeTextHint(securityCodeTextHint);
+    //view.setSecurityCodeTextHint(securityCodeTextHint);
+    view.setSecurityCodeTextHint("Código de seguridad");
   }
 
 

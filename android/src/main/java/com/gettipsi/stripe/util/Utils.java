@@ -10,11 +10,11 @@ public class Utils {
 
     public static String validateCard(final Card card) {
         if (!card.validateNumber()) {
-            return "The card number that you entered is invalid";
+            return "El número de tarjeta ingresado no es válido";
         } else if (!card.validateExpiryDate()) {
-            return "The expiration date that you entered is invalid";
+            return "La fecha de expiración ingresada no es válida";
         } else if (!card.validateCVC()) {
-            return "The CVC code that you entered is invalid";
+            return "El código CVC ingresado es inválido";
         }
         return null;
     }
